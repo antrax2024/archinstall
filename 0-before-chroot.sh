@@ -38,7 +38,7 @@ echogreen "Press any key to continue..."
 read -r -p
 
 pacstrap -K /mnt base base-devel linux-zen linux-zen-headers amd-ucode linux-firmware \
-	neovim git dosfstools grub efibootmgr networkmanager network-manager-applet man
+	neovim git dosfstools grub efibootmgr os-prober networkmanager network-manager-applet man
 
 echoyellow "Generating fstab..."
 genfstab -U /mnt >>/mnt/etc/fstab
