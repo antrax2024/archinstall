@@ -13,9 +13,6 @@ fi
 
 loadkeys br-abnt2
 
-pacman -Sy
-pacman -S neovim git
-
 echo "Enter EFI partition: "
 read -r EFI_PART
 
