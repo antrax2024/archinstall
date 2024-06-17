@@ -13,8 +13,6 @@ else
 	exit
 fi
 
-loadkeys br-abnt2
-
 echo "$gA Enter EFI partition: "
 read -r EFI_PART
 
