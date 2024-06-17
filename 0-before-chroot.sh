@@ -2,7 +2,9 @@
 
 source ./rainbow.sh
 
-echogreen 'Do you partitioned the disk?'
+gA=$(echogreen "==>")
+
+echo 'Do you partitioned the disk?'
 read -r answer
 
 if [ "$answer" != "${answer#[Yy]}" ]; then
@@ -13,34 +15,33 @@ fi
 
 loadkeys br-abnt2
 
-echo "Enter EFI partition: "
+echo "$gA Enter EFI partition: "
 read -r EFI_PART
 
-echo "Enter ROOT partition: "
+echo "$gA Enter ROOT partition: "
 read -r ROOT_PART
 
-echo ""
-echogreen "Format $EFI_PART..."
+echo "$gA Format $EFI_PART..."
 mkfs.fat -F 32 "$EFI_PART"
 
-echogreen "Format $ROOT_PART..."
+echo "$gA Format $ROOT_PART..."
 mkfs.ext4 "$ROOT_PART"
 
-echogreen "Mounting $ROOT_PART..."
+echo "$gA Mounting $ROOT_PART..."
 mount "$ROOT_PART" /mnt
 
-echogreen "Mounting $EFI_PART..."
+echo "$gA Mounting $EFI_PART..."
 mkdir -p /mnt/boot/efi
 mount "$EFI_PART" /mnt/boot/efi
 
-echoyellow "Now, i will perform pacstrap."
-echogreen "Press any key to continue..."
+echo "$gA Now, i will perform pacstrap."
+echo "Press any key to continue..."
 read -r -p
 
 pacstrap -K /mnt base base-devel linux-zen linux-zen-headers amd-ucode linux-firmware \
 	neovim git dosfstools grub efibootmgr os-prober networkmanager network-manager-applet man
 
-echoyellow "Generating fstab..."
+echo "$gA Generating fstab..."
 genfstab -U /mnt >>/mnt/etc/fstab
 
-echogreen "Now, you can perform a arch-chroot /mnt..."
+echo "Now, you can perform a arch-chroot /mnt..."
